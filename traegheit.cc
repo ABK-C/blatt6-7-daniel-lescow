@@ -29,7 +29,7 @@ int berechne(int N, double M, double ZM_R, Vektor a , Vektor u, double ZM_L){
   for (int i = 0; i < N; ++i) {
     Vektor x = zm->punkt();
     // Abstand Punkt x und Gerade a + t*u
-    Vektor n = (x-a).kreuz(u); // Vektor n = ...;//Normalenvektor x-a kreuz u
+    Vektor n = (x-a+a).kreuz(u); // Vektor n = ...;//Normalenvektor x-a kreuz u
     double r = n.betrag() / u.betrag(); //|n|/|u|
     //std::cout << x << " :" << r << std::endl;
     ZM_J_be += m * r * r; // addiere Beitrag des Massenpunktes zum Traegheitsmoment
@@ -45,7 +45,7 @@ int berechne(int N, double M, double ZM_R, Vektor a , Vektor u, double ZM_L){
   for (int i = 0; i < N; ++i) {
     Vektor x = vz->punkt();
     // Abstand Punkt x und Gerade a + t*u
-    Vektor n = (x-a).kreuz(u); // Vektor n = ...;//Normalenvektor x-a kreuz u
+    Vektor n = (x-a+a).kreuz(u); // Vektor n = ...;//Normalenvektor x-a kreuz u
     double r = n.betrag() / u.betrag(); //|n|/|u|
     //std::cout << x << " :" << r << std::endl;
     VZ_J_be += m * r * r; // addiere Beitrag des Massenpunktes zum Traegheitsmoment
@@ -76,6 +76,7 @@ int main() {
   berechne(N, 2, 1, a, u, 1);
   berechne(N, 1, 2, a, u, 1);
 
+  fout<<""<<std::endl;
   a = Vektor(0,1,0);
   berechne(N, 1, 1, a, u, 1);
   berechne(N, 2, 1, a, u, 1);
