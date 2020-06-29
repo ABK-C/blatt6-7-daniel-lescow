@@ -3,17 +3,26 @@
 #include <cmath>
 #include <cstdlib>
 
-Vollzylinder::Vollzylinder(double nr, double nl) {
+Vollzylinder::Vollzylinder(double nr, double nl, double nm) {
   r_ = nr;
   l_ = nl;
+  m_ = nm;
 }
 
 Vektor Vollzylinder::punkt() {
-  double R = 0;
+  double R = r_ * sqrt(rand() / (double)RAND_MAX);
   double phi = 2 * M_PI * rand() / (double)RAND_MAX;
   double z = l_ * (rand() / (double)RAND_MAX - 0.5);
 
-  double x = 0;
-  double y = 0;
+  double x = R * cos(phi);
+  double y = R * sin(phi);
   return Vektor(x, y, z);
 };
+
+double Vollzylinder::J_an() {
+  return 0.5*m_*pow(r_,2);
+}
+
+double Vollzylinder::M() {
+  return m_;
+}
